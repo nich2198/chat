@@ -15,6 +15,10 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
     setIsBotDisplayed(true);
   };
 
+  const closeBot = () => {
+    setIsBotDisplayed(false);
+  };
+
   const botLauncherObserver = new IntersectionObserver((intersections) => {
     if (intersections.some((intersection) => intersection.isIntersecting)) launchBot();
   });
@@ -57,6 +61,7 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
             apiHost={props.apiHost}
             isFullPage={true}
             observersConfig={props.observersConfig}
+            closeBot={closeBot}
           />
         </div>
       </Show>

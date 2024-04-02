@@ -12,7 +12,7 @@ import { Badge } from './Badge';
 import socketIOClient from 'socket.io-client';
 import { Popup } from '@/features/popup';
 import { Avatar } from '@/components/avatars/Avatar';
-import { DeleteButton, SendButton } from '@/components/buttons/SendButton';
+import { DeleteButton, SendButton, CloseButton } from '@/components/buttons/SendButton';
 import { CircleDotIcon, TrashIcon } from './icons';
 import { CancelButton } from './buttons/CancelButton';
 import { cancelAudioRecording, startAudioRecording, stopAudioRecording } from '@/utils/audioRecording';
@@ -76,6 +76,7 @@ export type BotProps = {
   fontSize?: number;
   isFullPage?: boolean;
   observersConfig?: observersConfigType;
+  closeBot?: () => void;
 };
 
 const defaultWelcomeMessage = 'Hi there! How can I help?';
@@ -412,6 +413,15 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
           type: 'apiMessage',
         },
       ]);
+    } catch (error: any) {
+      const errorData = error.response.data || `${error.response.status}: ${error.response.statusText}`;
+      console.error(`error: ${errorData}`);
+    }
+  };
+
+  const closeChat = () => {
+    try {
+      if (props.closeBot) props?.closeBot();
     } catch (error: any) {
       const errorData = error.response.data || `${error.response.status}: ${error.response.statusText}`;
       console.error(`error: ${errorData}`);
@@ -792,6 +802,9 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
               <span class="px-3 whitespace-pre-wrap font-semibold max-w-full">{props.title}</span>
             </Show>
             <div style={{ flex: 1 }} />
+            <CloseButton sendButtonColor={props.bubbleTextColor} type="button" on:click={closeChat}>
+              <span style={{ 'font-family': 'Poppins, sans-serif' }}>Close</span>
+            </CloseButton>
             <DeleteButton
               sendButtonColor={props.bubbleTextColor}
               type="button"

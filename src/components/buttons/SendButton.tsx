@@ -47,6 +47,27 @@ export const DeleteButton = (props: SendButtonProps) => {
   );
 };
 
+export const CloseButton = (props: SendButtonProps) => {
+  return (
+    <button
+      type="submit"
+      disabled={props.isDisabled || props.isLoading}
+      {...props}
+      class={
+        'py-2 justify-center font-semibold text-white focus:outline-none flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 chatbot-button ' +
+        props.class
+      }
+      style={{ background: 'transparent', border: 'none' }}
+      title="New Chat"
+    >
+      <svg width="24px" height="24px" viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 21.32L21 3.32001" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M3 3.32001L21 21.32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+  );
+};
+
 export const Spinner = (props: JSX.SvgSVGAttributes<SVGSVGElement>) => (
   <svg
     {...props}
