@@ -35,7 +35,7 @@ export const Bubble = (props: BubbleProps) => {
   return (
     <>
       <style>{styles}</style>
-      <BubbleButton {...bubbleProps.theme?.button} toggleBot={toggleBot} isBotOpened={isBotOpened()} />
+      {!isBotOpened() && <BubbleButton {...bubbleProps.theme?.button} toggleBot={toggleBot} isBotOpened={isBotOpened()} />}
       <div
         part="bot"
         style={{
@@ -51,7 +51,7 @@ export const Bubble = (props: BubbleProps) => {
         class={
           `fixed sm:right-5 rounded-lg w-full sm:w-[400px] max-h-[704px]` +
           (isBotOpened() ? ' opacity-1' : ' opacity-0 pointer-events-none') +
-          (props.theme?.button?.size === 'large' ? ' bottom-24' : ' bottom-20')
+          (props.theme?.button?.size === 'large' ? ' bottom-10' : ' bottom-20')
         }
       >
         <Show when={isBotStarted()}>
