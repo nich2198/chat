@@ -802,18 +802,12 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
               <span class="px-3 whitespace-pre-wrap font-semibold max-w-full">{props.title}</span>
             </Show>
             <div style={{ flex: 1 }} />
-            <CloseButton sendButtonColor={props.bubbleTextColor} type="button" on:click={closeChat}>
-              <span style={{ 'font-family': 'Poppins, sans-serif' }}>Close</span>
-            </CloseButton>
-            <DeleteButton
-              sendButtonColor={props.bubbleTextColor}
-              type="button"
-              isDisabled={messages().length === 1}
-              class="my-2 ml-2"
-              on:click={clearChat}
-            >
+            <DeleteButton sendButtonColor={props.bubbleTextColor} type="button" isDisabled={messages().length === 1} on:click={clearChat}>
               <span style={{ 'font-family': 'Poppins, sans-serif' }}>Clear</span>
             </DeleteButton>
+            <CloseButton class="my-2 ml-2" sendButtonColor={props.bubbleTextColor} type="button" on:click={closeChat}>
+              <span style={{ 'font-family': 'Poppins, sans-serif' }}>Close</span>
+            </CloseButton>
           </div>
         ) : null}
         <div class="flex flex-col w-full h-full justify-start z-0">
